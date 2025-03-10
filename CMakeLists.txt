@@ -47,3 +47,4 @@ if (XCODE)
         XCODE_SCHEME_ENABLE_GPU_FRAME_CAPTURE_MODE "Metal"
     )
 endif()
+
