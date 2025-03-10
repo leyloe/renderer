@@ -1,34 +1,57 @@
 #include <webgpu/webgpu.h>
 #include <iostream>
 #include <cassert>
+#include <glm/glm.hpp>
 
-struct UserData
-{
-    WGPUAdapter adapter = nullptr;
-    bool requestEnded = false;
-};
+// WGPUAdapter requestAdapterSync(WGPUInstance instance, WGPURequestAdapterOptions const *options)
+// {
+//     struct UserData
+//     {
+//         WGPUAdapter adapter = nullptr;
+//         bool requestEnded = false;
+//     };
+//     UserData userData;
+
+//     auto onAdapterRequestEnded = [](WGPURequestAdapterStatus status, WGPUAdapter adapter, char const *message, void *pUserData)
+//     {
+//         UserData &userData = *reinterpret_cast<UserData *>(pUserData);
+//         if (status == WGPURequestAdapterStatus_Success)
+//         {
+//             userData.adapter = adapter;
+//         }
+//         else
+//         {
+//             std::cout << "Could not get WebGPU adapter: " << message << std::endl;
+//         }
+//         userData.requestEnded = true;
+//     };
+
+//     wgpuInstanceRequestAdapter(
+//         instance /* equivalent of navigator.gpu */,
+//         options,
+//         onAdapterRequestEnded,
+//         (void *)&userData);
+
+//     assert(userData.requestEnded);
+
+//     return userData.adapter;
+// }
 
 int main()
 {
-    // We create a descriptor
     WGPUInstanceDescriptor desc = {};
     desc.nextInChain = nullptr;
 
-    // We create the instance using this descriptor
     WGPUInstance instance = wgpuCreateInstance(&desc);
 
-    // We can check whether there is actually an instance created
     if (!instance)
     {
         std::cerr << "Could not initialize WebGPU!" << std::endl;
         return 1;
     }
 
-    // Display the object (WGPUInstance is a simple pointer, it may be
-    // copied around without worrying about its size).
     std::cout << "WGPU instance: " << instance << std::endl;
 
-    // Desroy the instance
     wgpuInstanceRelease(instance);
 
     return 0;

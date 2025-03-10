@@ -29,7 +29,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDES})
 ## Extra ##
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    CXX_STANDARD 17
+    CXX_STANDARD 23
     CXX_STANDARD_REQUIRED ON
     CXX_EXTENSIONS OFF
     COMPILE_WARNING_AS_ERROR ON
@@ -48,3 +48,14 @@ if (XCODE)
     )
 endif()
 
+## Fetch ##
+
+include(FetchContent)
+
+FetchContent_Declare(
+    dawn
+    GIT_REPOSITORY https://dawn.googlesource.com/dawn
+    GIT_TAG main  # Change this to a specific commit or tag for stability
+)
+
+FetchContent_MakeAvailable(dawn)
