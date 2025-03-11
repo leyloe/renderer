@@ -16,12 +16,13 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
-find_package(Dawn REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
     glfw
     glm::glm
-    dawn::webgpu_dawn
+    webgpu_dawn
+    webgpu_glfw
+    webgpu_cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDES})
@@ -48,14 +49,12 @@ if (XCODE)
     )
 endif()
 
+## Set ##
+
+set(DAWN_FETCH_DEPENDENCIES ON)
+
 ## Fetch ##
 
-include(FetchContent)
+include(cmake/CPM.cmake)
 
-FetchContent_Declare(
-    dawn
-    GIT_REPOSITORY https://dawn.googlesource.com/dawn
-    GIT_TAG main  # Change this to a specific commit or tag for stability
-)
-
-FetchContent_MakeAvailable(dawn)
+CPMAddPackage("https://dawn.googlesource.com/dawn/+archive/refs/heads/main.tar.gz")
