@@ -14,11 +14,9 @@ set(SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
-    glfw
     glm::glm
     webgpu_dawn
     webgpu_glfw
@@ -57,4 +55,4 @@ set(DAWN_FETCH_DEPENDENCIES ON)
 
 include(cmake/CPM.cmake)
 
-CPMAddPackage("https://dawn.googlesource.com/dawn/+archive/refs/heads/main.tar.gz")
+CPMAddPackage(NAME dawn URL "https://dawn.googlesource.com/dawn/+archive/refs/heads/main.tar.gz")
