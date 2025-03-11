@@ -53,6 +53,12 @@ set(DAWN_FETCH_DEPENDENCIES ON)
 
 ## Fetch ##
 
-include(cmake/CPM.cmake)
+include(FetchContent)
 
-CPMAddPackage(NAME dawn URL "https://dawn.googlesource.com/dawn/+archive/refs/heads/main.tar.gz")
+FetchContent_Declare(
+    dawn
+    URL https://dawn.googlesource.com/dawn/+archive/refs/heads/main.tar.gz
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+
+FetchContent_MakeAvailable(dawn)
