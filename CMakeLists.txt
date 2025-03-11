@@ -58,7 +58,6 @@ include(FetchContent)
 FetchContent_Declare(
     dawn
     URL https://dawn.googlesource.com/dawn/+archive/refs/heads/main.tar.gz
-    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 
 FetchContent_MakeAvailable(dawn)
