@@ -1,12 +1,12 @@
 #include <webgpu/webgpu_glfw.h>
 #include <iostream>
+#include <GLFW/glfw3.h>
 
 int main()
 {
-    WGPUInstanceDescriptor desc = {};
-    desc.nextInChain = nullptr;
+    wgpu::InstanceDescriptor desc = {};
 
-    WGPUInstance instance = wgpuCreateInstance(&desc);
+    wgpu::Instance instance = wgpu::CreateInstance(&desc);
 
     if (!instance)
     {
@@ -14,9 +14,20 @@ int main()
         return 1;
     }
 
-    std::cout << "WGPU instance: " << instance << std::endl;
+    std::cout << "WGPU instance: " << instance.Get() << std::endl;
 
-    wgpuInstanceRelease(instance);
+    glfwInit();
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+    GLFWwindow *window = glfwCreateWindow(800, 800, "app", nullptr, nullptr);
+
+    while (!glfwWindowShouldClose(window))
+    {
+        glfwPollEvents();
+    }
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
 
     return 0;
 }
