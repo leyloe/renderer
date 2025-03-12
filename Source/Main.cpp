@@ -8,14 +8,6 @@ int main()
 
     wgpu::Instance instance = wgpu::CreateInstance(&desc);
 
-    if (!instance)
-    {
-        std::cerr << "Could not initialize WebGPU!" << std::endl;
-        return 1;
-    }
-
-    std::cout << "WGPU instance: " << instance.Get() << std::endl;
-
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
